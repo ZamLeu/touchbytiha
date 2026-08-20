@@ -1,0 +1,217 @@
+/**
+ * touchbytiha — Testimonials Section
+ * Auto-scrolling horizontal carousel
+ */
+
+/* ========================================
+   TESTIMONIALS SECTION
+   ======================================== */
+.testimonials {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+[data-theme="dark"] .testimonials::before {
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+/* ========================================
+   TESTIMONIALS CAROUSEL
+   ======================================== */
+.testimonials-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  /* Fade edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  /* Allow horizontal drag/swipe */
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.testimonials-wrapper:active {
+  cursor: grabbing;
+}
+
+.testimonials-track {
+  display: flex;
+  gap: var(--space-lg);
+  animation: scroll-left 30s linear infinite;
+  will-change: transform;
+  /* Allow transform manipulation via JS */
+  transform-origin: 0 50%;
+}
+
+/* Pause on hover/focus */
+.testimonials-wrapper:hover .testimonials-track,
+.testimonials-wrapper:focus-within .testimonials-track {
+  animation-play-state: paused;
+}
+
+/* ========================================
+   TESTIMONIAL CARD - fixed compact size
+   ======================================== */
+.testimonial-card {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 180px;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.testimonial-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-card:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+
+/* Subtle magnifier hint on hover / focus */
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") center / 44px 44px no-repeat,
+    rgba(20, 15, 12, 0.35);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.testimonial-card:hover::after,
+.testimonial-card:focus-visible::after {
+  opacity: 1;
+}
+
+/* ========================================
+   TESTIMONIAL IMAGE - fills card
+   ======================================== */
+.testimonial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--bg-muted);
+}
+
+/* ========================================
+   TESTIMONIAL OVERLAY META
+   ======================================== */
+.testimonial-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    transparent 100%
+  );
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.testimonial-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: white;
+  margin: 0 0 2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.testimonial-event {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   VERIFIED BADGE - minimal
+   ======================================== */
+.testimonial-badge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: var(--accent);
+  color: var(--accent-fg);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.testimonial-badge svg {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   ANIMATION
+   ======================================== */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-track {
+    animation: none;
+  }
+}

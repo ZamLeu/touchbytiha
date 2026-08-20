@@ -1,0 +1,246 @@
+/**
+ * touchbytiha — Header & Navigation
+ */
+
+/* ========================================
+   HEADER
+   ======================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 var(--space-lg);
+  transition: background var(--transition-base), backdrop-filter var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Scrolled state - stronger glass */
+.header.scrolled {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  box-shadow: 0 4px 30px var(--glass-shadow);
+  border-bottom: 1px solid var(--glass-border-strong);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .header {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+[data-theme="dark"] .header.scrolled {
+  box-shadow: 0 4px 30px var(--glass-shadow);
+}
+
+@media (min-width: 768px) {
+  .header { padding: 0 var(--space-xl); }
+}
+
+@media (min-width: 1024px) {
+  .header { padding: 0 var(--space-2xl); }
+}
+
+/* ========================================
+   LOGO
+   ======================================== */
+.logo {
+  font-family: var(--font-body);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  z-index: calc(var(--z-fixed) + 1);
+}
+
+.logo-icon {
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+
+.logo-text {
+  color: var(--accent);
+}
+
+.logo-text span {
+  color: var(--fg);
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.nav-link {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover {
+  color: var(--fg);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 70%;
+}
+
+.nav-link.active {
+  color: var(--fg);
+}
+
+/* ========================================
+   THEME TOGGLE
+   ======================================== */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  color: var(--fg);
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  z-index: calc(var(--z-fixed) + 1);
+}
+
+.theme-toggle:hover {
+  background: var(--glass-bg-strong);
+  border-color: var(--accent);
+  transform: rotate(15deg);
+  box-shadow: 0 8px 24px var(--glass-shadow);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ========================================
+   MOBILE MENU BUTTON
+   ======================================== */
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  z-index: calc(var(--z-fixed) + 1);
+}
+
+.mobile-menu-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 767px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  /* Mobile navigation drawer */
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    max-width: 85vw;
+    height: 100vh;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--glass-blur-strong));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--header-height) + var(--space-xl)) var(--space-xl) var(--space-xl);
+    gap: 0;
+    border-left: 1px solid var(--glass-border);
+    transition: right var(--transition-slow);
+    z-index: var(--z-fixed);
+    overflow-y: auto;
+  }
+  
+  .nav.open {
+    right: 0;
+  }
+  
+  .nav-list {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    margin-bottom: var(--space-xl);
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: var(--space-md) 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .nav-link::after {
+    display: none;
+  }
+  
+  .nav .theme-toggle {
+    margin-top: var(--space-lg);
+    align-self: flex-start;
+  }
+}
+
+/* ========================================
+   SCROLL PROGRESS (removed for minimalism)
+   ======================================== */

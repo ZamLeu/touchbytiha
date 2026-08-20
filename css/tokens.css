@@ -1,0 +1,193 @@
+/**
+ * touchbytiha — Design Tokens
+ * Skin-tone inspired palette for a makeup artist portfolio
+ */
+
+/* ========================================
+   PRIMITIVE COLORS (Skin-tone palette)
+   ======================================== */
+:root {
+  /* Canvas — the palest skin tone, backgrounds */
+  --color-canvas: #fdf8f5;
+  
+  /* Warmth — warm skin tone, elevated surfaces */
+  --color-warmth: #f5ebe3;
+  
+  /* Blush — skin blush, borders & dividers */
+  --color-blush: #e8d4cc;
+  
+  /* Terracotta — accent color, CTAs & highlights (softened) */
+  --color-terracotta: #d4a088;
+  --color-terracotta-deep: #c0896f;
+  --color-terracotta-light: #f6ebe5;
+  
+  /* Ink — warm dark text */
+  --color-ink: #2d2522;
+  --color-ink-muted: #7a6d65;
+}
+
+/* ========================================
+   SEMANTIC TOKENS (Use these in components)
+   ======================================== */
+:root {
+  /* Backgrounds */
+  --bg: var(--color-canvas);
+  --bg-elevated: var(--color-warmth);
+  
+  /* Foregrounds */
+  --fg: var(--color-ink);
+  --fg-muted: var(--color-ink-muted);
+  --fg-light: var(--color-canvas);
+  
+  /* Accent system */
+  --accent: var(--color-terracotta);
+  --accent-hover: var(--color-terracotta-deep);
+  --accent-soft: var(--color-terracotta-light);
+  
+  /* UI surfaces */
+  --card: var(--color-warmth);
+  --border: var(--color-blush);
+  
+  /* Shadows */
+  --shadow: rgba(45, 37, 34, 0.08);
+  --shadow-strong: rgba(45, 37, 34, 0.15);
+  
+  /* Focus */
+  --focus: var(--color-terracotta);
+  
+  /* Typography */
+  --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', monospace;
+  
+  /* Type scale (fluid) */
+  --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+  --text-sm: clamp(0.825rem, 0.775rem + 0.25vw, 0.9375rem);
+  --text-base: clamp(0.9375rem, 0.875rem + 0.3125vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.025rem + 0.5vw, 1.25rem);
+  --text-xl: clamp(1.375rem, 1.225rem + 0.75vw, 1.625rem);
+  --text-2xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem);
+  --text-3xl: clamp(2.25rem, 1.875rem + 1.875vw, 3rem);
+  --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  
+  /* Spacing scale */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 6rem;     /* 96px */
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Layout */
+  --container-max: 1200px;
+  --header-height: 70px;
+  
+  /* Z-index scale */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+  --z-tooltip: 700;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+[data-theme="dark"] {
+  --color-canvas: #1f1815;
+  --color-warmth: #2a221e;
+  --color-blush: #3d2e28;
+  --color-terracotta: #e8c4b0;
+  --color-terracotta-deep: #f0d5c5;
+  --color-terracotta-light: #3d2e28;
+  --color-ink: #faf8f5;
+  --color-ink-muted: #d4c4ba;
+  
+  --bg: var(--color-canvas);
+  --bg-elevated: var(--color-warmth);
+  --fg: var(--color-ink);
+  --fg-muted: var(--color-ink-muted);
+  --fg-light: var(--color-canvas);
+  --accent: var(--color-terracotta);
+  --accent-hover: var(--color-terracotta-deep);
+  --accent-soft: var(--color-terracotta-light);
+  --card: var(--color-warmth);
+  --border: var(--color-blush);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-strong: rgba(0, 0, 0, 0.5);
+  --focus: var(--color-terracotta);
+}
+
+/* ========================================
+   MOTION PREFERENCES
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0.01ms;
+    --transition-base: 0.01ms;
+    --transition-slow: 0.01ms;
+  }
+}
+
+/* ========================================
+   GLASSMORPHISM TOKENS
+   ======================================== */
+:root {
+  /* Glass surfaces */
+  --glass-bg: color-mix(in srgb, var(--bg-elevated) 75%, transparent);
+  --glass-bg-strong: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
+  --glass-border: color-mix(in srgb, var(--border) 60%, transparent);
+  --glass-border-strong: color-mix(in srgb, var(--accent-soft) 40%, transparent);
+  --glass-shadow: rgba(45, 37, 34, 0.08);
+  --glass-shadow-strong: rgba(45, 37, 34, 0.15);
+  
+  /* Blur strengths */
+  --glass-blur: 20px;
+  --glass-blur-strong: 30px;
+}
+
+[data-theme="dark"] {
+  --glass-bg: color-mix(in srgb, var(--bg-elevated) 75%, transparent);
+  --glass-bg-strong: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
+  --glass-border: color-mix(in srgb, var(--border) 50%, transparent);
+  --glass-border-strong: color-mix(in srgb, var(--accent-soft) 30%, transparent);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --glass-shadow-strong: rgba(0, 0, 0, 0.5);
+}
+
+/* Fallback for browsers without color-mix */
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  :root {
+    --glass-bg: rgba(245, 235, 227, 0.75);
+    --glass-bg-strong: rgba(245, 235, 227, 0.9);
+    --glass-border: rgba(232, 212, 204, 0.6);
+    --glass-border-strong: rgba(242, 225, 220, 0.4);
+    --glass-shadow: rgba(45, 37, 34, 0.08);
+    --glass-shadow-strong: rgba(45, 37, 34, 0.15);
+  }
+  
+  [data-theme="dark"] {
+    --glass-bg: rgba(42, 34, 30, 0.75);
+    --glass-bg-strong: rgba(42, 34, 30, 0.9);
+    --glass-border: rgba(61, 46, 40, 0.5);
+    --glass-border-strong: rgba(212, 165, 149, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --glass-shadow-strong: rgba(0, 0, 0, 0.5);
+  }
+}

@@ -1,0 +1,169 @@
+/**
+ * touchbytiha — Portfolio Section (Minimalist Gallery)
+ * Clean masonry grid, subtle hover, lightbox
+ */
+
+.portfolio {
+  background: var(--bg);
+  position: relative;
+}
+
+.portfolio::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 550px;
+  height: 350px;
+  background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+[data-theme="dark"] .portfolio::before {
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 60%);
+  opacity: 0.7;
+}
+
+/* Grid - uses grid-1-2-3 utility from layout.css */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile lookbook: horizontal snap-scroll strip (images keep full size) */
+@media (max-width: 767px) {
+  .portfolio-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--space-md);
+    scrollbar-width: thin;
+    padding-bottom: var(--space-sm);
+  }
+
+  .portfolio-item {
+    flex: 0 0 min(78vw, 320px);
+    scroll-snap-align: center;
+  }
+
+  .portfolio-item.featured {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (min-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+
+/* Portfolio item */
+.portfolio-item {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.portfolio-item:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 40px var(--shadow-strong);
+  border-color: var(--accent-soft);
+}
+
+.portfolio-item:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Overlay */
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(45, 37, 34, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-xl);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+[data-theme="dark"] .portfolio-overlay {
+  background: linear-gradient(180deg, transparent 40%, rgba(15, 12, 10, 0.9) 100%);
+}
+
+.portfolio-item:hover .portfolio-overlay,
+.portfolio-item:focus .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio-category {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+  transform: translateY(8px);
+  transition: transform var(--transition-base);
+}
+
+.portfolio-title {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: #faf8f5;  /* Always light on dark overlay */
+  transform: translateY(8px);
+  transition: transform var(--transition-base) 0.1s;
+}
+
+.portfolio-item:hover .portfolio-category,
+.portfolio-item:hover .portfolio-title {
+  transform: translateY(0);
+}
+
+/* Featured item - spans 2 columns on desktop */
+.portfolio-item.featured {
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 1024px) {
+  .portfolio-item.featured {
+    grid-column: span 2;
+  }
+}
+
+/* Staggered reveal - delays applied via inline style in JS */
+
+/* Lightbox is handled in lightbox.css */

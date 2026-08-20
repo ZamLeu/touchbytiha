@@ -1,0 +1,23 @@
+{
+  "services": [
+    {
+      "icon": "💄",
+      "title": "Bridal Makeup",
+      "desc": "Complete bridal look with trial session, premium lashes, and touch-up kit for your special day.",
+      "price": "RM 200"
+    },
+    {
+      "icon": "💍",
+      "title": "Engagement Makeup",
+      "desc": "Beautiful engagement ceremony look with trial session and long-lasting wear.",
+      "price": "RM 130"
+    },
+    {
+      "icon": "✨",
+      "title": "Event & Party Makeup",
+      "desc": "Glam makeup for events, parties, and celebrations that lasts all night long.",
+      "price": "RM 100"
+    }
+  ],
+  "note": "Prices do not include transportation fee"
+}

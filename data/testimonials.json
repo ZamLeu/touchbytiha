@@ -1,0 +1,23 @@
+{
+  "testimonials": [
+    {
+      "img": "images/portfolio/test1.jpg",
+      "alt": "Customer feedback screenshot 1",
+      "name": "Sarah M.",
+      "event": "Bridal Makeup",
+      "featured": true
+    },
+    {
+      "img": "images/portfolio/test2.png",
+      "alt": "Customer feedback screenshot 2",
+      "name": "Aisha R.",
+      "event": "Engagement Makeup"
+    },
+    {
+      "img": "images/portfolio/test3.png",
+      "alt": "Customer feedback screenshot 3",
+      "name": "Nurul H.",
+      "event": "Event Makeup"
+    }
+  ]
+}

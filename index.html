@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>touchbytiha — Makeup Artist & Beauty Studio</title>
+  <meta name="description" content="Professional makeup artist specializing in bridal, engagement, and event makeup. Book your session today.">
+
+  <!-- Preconnect to CDN for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- Modular CSS -->
+  <link rel="stylesheet" href="css/index.css">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="touchbytiha — Makeup Artist & Beauty Studio">
+  <meta property="og:description" content="Professional bridal, engagement, and event makeup artistry.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💄</text></svg>">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="header" role="banner">
+    <a href="#" class="logo" aria-label="touchbytiha Home">
+      <span class="logo-icon" aria-hidden="true">💄</span>
+      <span class="logo-text">touchby<span>tiha.</span></span>
+    </a>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <ul class="nav-list" role="list">
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </nav>
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <main role="main">
+    <!-- Hero Section -->
+    <section class="hero" aria-label="Hero">
+
+      <article class="hero-content">
+        <h1 class="hero-title">touchbytiha.</h1>
+        <p class="hero-subtitle">
+          Elevating beauty through artistry — bespoke makeup for brides,
+          editorials, and the moments that matter.
+        </p>
+        <div class="hero-cta">
+          <a href="#portfolio" class="btn btn-primary">
+            View Portfolio
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+
+        </div>
+      </article>
+
+    </section>
+<!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio" aria-labelledby="portfolio-title">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-tag">Selected Works</span>
+          <h2 id="portfolio-title" class="section-title">The <span class="accent">Lookbook</span></h2>
+          <p class="section-desc">A curated collection of bridal, editorial, and creative makeup artistry.</p>
+        </header>
+        <div class="portfolio-grid" role="list">
+          <!-- Rendered by JS from data/portfolio.json -->
+        </div>
+      </div>
+    </section>
+
+              </article>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image reveal">
+            <img
+              src="images/portfolio/tiha.jpeg"
+              alt="Tiha — part-time makeup artist, passionate about her craft"
+              loading="lazy"
+            >
+          </div>
+          <div class="about-content reveal">
+            <header class="section-header about-header">
+              <span class="section-tag">About Me</span>
+              <h2 id="about-title" class="section-title">The Artist <span class="accent">Behind the Brush</span></h2>
+            </header>
+            <p class="about-text">
+              I'm a part-time makeup artist — and I wouldn't have it any
+              other way. Makeup is my side passion, my creative outlet
+              between life's other roles. It's that balance that keeps me
+              hungry, humble, and genuinely excited each time a new face
+              sits in my chair — so every look still feels authentically
+              <em>you</em>, only more radiant.
+            </p>
+            <p class="about-text">
+              Bridal glow, editorial drama, or an everyday soft-glam moment —
+              whatever you're celebrating, I bring the joy of doing what I
+              love, and leave every face with a little extra confidence,
+              color, and just a bit of magic.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section><!-- Services Section -->
+    <section id="services" class="section services" aria-labelledby="services-title">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-tag">What I Offer</span>
+          <h2 id="services-title" class="section-title">Services & <span class="accent">Pricing</span></h2>
+          <p class="section-desc">Tailored experiences for every occasion. All services include a personalized consultation.</p>
+          <p class="section-desc services-note">*Prices do not include transportation fee</p>
+        </header>
+        <div class="services-grid grid-1-3" role="list">
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-tag">Real Stories</span>
+          <h2 id="testimonials-title" class="section-title">Client <span class="accent">Testimonials</span></h2>
+          <p class="section-desc">Genuine feedback from real clients. Screenshots of actual conversations.</p>
+        </header>
+        <div class="testimonials-grid" role="list">
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <header class="section-header contact-header">
+              <span class="section-tag">Get In Touch</span>
+              <h2 id="contact-title" class="section-title">Let's Create <span class="accent">Something Beautiful</span></h2>
+            </header>
+            <p class="contact-desc">
+              Ready to book your session or have questions?
+              I'd love to hear from you.
+            </p>
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Email</h4>
+                  <p>tihahfadir@gmail.com</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Location</h4>
+                  <p>JKR4666B, MEDAN MARA BRIGED UTARA, 31150, ULU KINTA, PERAK</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4>WhatsApp</h4>
+                  <p><a href="https://wa.me/601137708023" target="_blank" rel="noopener">011-3770 8023</a></p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Instagram</h4>
+                  <p><a href="https://instagram.com/touchbytiha" target="_blank" rel="noopener">@touchbytiha</a></p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Hours</h4>
+                  <p>Weekday: 7pm onwards • Weekend: All day</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="contact-form reveal" novalidate>
+            <div class="form-group">
+              <input type="text" id="name" name="name" class="form-input" placeholder=" " required aria-describedby="name-error">
+              <label for="name" class="form-label">Full Name</label>
+              <span id="name-error" class="form-error" aria-live="polite">Please enter your name</span>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" class="form-input" placeholder=" " required aria-describedby="email-error">
+              <label for="email" class="form-label">Email Address</label>
+              <span id="email-error" class="form-error" aria-live="polite">Please enter a valid email</span>
+            </div>
+            <div class="form-group">
+              <select id="service" name="service" class="form-input" required aria-describedby="service-error">
+                <option value="" disabled selected hidden></option>
+                <option value="bridal">Bridal Makeup</option>
+                <option value="engagement">Engagement Makeup</option>
+                <option value="event">Event & Party Makeup</option>
+                <option value="other">Other Inquiry</option>
+              </select>
+              <label for="service" class="form-label">Service of Interest</label>
+              <span id="service-error" class="form-error" aria-live="polite">Please select a service</span>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" class="form-input" rows="4" placeholder=" " required aria-describedby="message-error"></textarea>
+              <label for="message" class="form-label">Message</label>
+              <span id="message-error" class="form-error" aria-live="polite">Please enter your message</span>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              Send Message
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="touchbytiha Home">
+          <span class="logo-icon" aria-hidden="true">💄</span>
+          <span class="logo-text">touchby<span>tiha</span></span>
+        </a>
+        <p>Elevating beauty through artistry — bespoke makeup for the modern bride and beyond.</p>
+        <div class="social-links" role="list" aria-label="Social links">
+          <a href="https://instagram.com/touchbytiha" class="social-link" aria-label="Instagram" target="_blank" rel="noopener" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://wa.me/601137708023" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Quick links">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-nav" aria-label="Services">
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-links">
+          <li><a href="#services">Bridal Makeup</a></li>
+          <li><a href="#services">Engagement Makeup</a></li>
+          <li><a href="#services">Event & Party</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h3 class="footer-title">Connect</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:tihahfadir@gmail.com">tihahfadir@gmail.com</a></li>
+          <li><a href="https://wa.me/601137708023" target="_blank" rel="noopener">011-3770 8023</a></li>
+          <li><a href="https://instagram.com/touchbytiha" target="_blank" rel="noopener">@touchbytiha</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2025 touchbytiha. All rights reserved.</p>
+      <nav class="footer-legal" aria-label="Legal links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="form-success" role="status" aria-live="polite" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span>Message sent! I'll be in touch soon.</span>
+  </div>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <span class="lightbox-counter"></span>
+    <button class="lightbox-close" aria-label="Close lightbox">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" aria-label="Next image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img src="" alt="">
+    </div>
+    <p class="lightbox-caption"></p>
+  </div>
+
+  <script type="module" src="js/app.js" defer></script>
+</body>
+</html>
