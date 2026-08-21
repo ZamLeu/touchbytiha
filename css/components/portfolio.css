@@ -36,26 +36,21 @@
   z-index: 1;
 }
 
-/* Mobile lookbook: horizontal snap-scroll strip (images keep full size) */
+/* Mobile lookbook: show every result in a compact vertical grid */
 @media (max-width: 767px) {
   .portfolio-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-md);
-    scrollbar-width: thin;
-    padding-bottom: var(--space-sm);
   }
 
   .portfolio-item {
-    flex: 0 0 min(78vw, 320px);
-    scroll-snap-align: center;
+    min-width: 0;
   }
 
   .portfolio-item.featured {
     aspect-ratio: 3 / 4;
+    grid-column: span 2;
+    grid-row: 1;
   }
 }
 

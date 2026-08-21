@@ -6,6 +6,9 @@
    HERO
    ======================================== */
 .hero {
+  --hero-sparkle-color: var(--accent-hover);
+  --hero-sparkle-dim: 0.55;
+  --hero-sparkle-bright: 1;
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -38,6 +41,68 @@
   opacity: 0.65;
 }
 
+/* Lightweight shimmer particles spread across the full hero */
+.hero-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-sparkles span {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  will-change: transform;
+  animation: hero-sparkle-drift 10s ease-in-out infinite alternate;
+}
+
+.hero-sparkles span::before,
+.hero-sparkles span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--hero-sparkle-color);
+  transform: translate(-50%, -50%);
+}
+
+.hero-sparkles span::before {
+  width: 10px;
+  height: 1px;
+}
+
+.hero-sparkles span::after {
+  width: 1px;
+  height: 10px;
+}
+
+.hero-sparkles span:nth-child(1) { top: 16%; left: 10%; animation-delay: -3s; }
+.hero-sparkles span:nth-child(2) { top: 11%; left: 32%; animation-delay: -7s; }
+.hero-sparkles span:nth-child(3) { top: 22%; left: 76%; animation-delay: -1s; }
+.hero-sparkles span:nth-child(4) { top: 8%; left: 91%; animation-delay: -5s; }
+.hero-sparkles span:nth-child(5) { top: 42%; left: 7%; animation-delay: -8s; }
+.hero-sparkles span:nth-child(6) { top: 37%; left: 21%; animation-delay: -2s; }
+.hero-sparkles span:nth-child(7) { top: 48%; left: 83%; animation-delay: -6s; }
+.hero-sparkles span:nth-child(8) { top: 61%; left: 94%; animation-delay: -4s; }
+.hero-sparkles span:nth-child(9) { top: 75%; left: 14%; animation-delay: -9s; }
+.hero-sparkles span:nth-child(10) { top: 83%; left: 38%; animation-delay: -1s; }
+.hero-sparkles span:nth-child(11) { top: 78%; left: 68%; animation-delay: -7s; }
+.hero-sparkles span:nth-child(12) { top: 88%; left: 88%; animation-delay: -3s; }
+
+[data-theme="dark"] .hero-sparkles span {
+  --hero-sparkle-color: var(--accent);
+  --hero-sparkle-dim: 0.2;
+  --hero-sparkle-bright: 0.58;
+}
+
+@keyframes hero-sparkle-drift {
+  0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: var(--hero-sparkle-dim); }
+  50% { opacity: var(--hero-sparkle-bright); }
+  100% { transform: translate3d(16px, -22px, 0) scale(1.15); opacity: var(--hero-sparkle-dim); }
+}
+
 /* Hero content */
 .hero-content {
   position: relative;
@@ -60,6 +125,7 @@
   color: var(--fg);
   margin-bottom: var(--space-lg);
   letter-spacing: 0.01em;
+  text-shadow: 0 8px 24px rgba(192, 137, 111, 0.18);
 }
 
 .hero-title .word {
@@ -67,6 +133,15 @@
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* "touchby" keeps the original text color; "tiha." carries the accent. */
+.hero-title .word:nth-child(n + 8) {
+  color: var(--accent-hover);
+}
+
+[data-theme="dark"] .hero-title .word:nth-child(n + 8) {
+  color: var(--accent);
 }
 
 .hero-title .word.visible {
@@ -106,10 +181,16 @@
    RESPONSIVE TYPOGRAPHY ADJUSTMENTS
    ======================================== */
 @media (max-width: 480px) {
-  .hero-title { font-size: var(--text-3xl); }
+  .hero-title { font-size: clamp(2.6rem, 12vw, 3.2rem); }
   .hero-subtitle { font-size: var(--text-base); }
 }
 
 @media (min-width: 1024px) {
-  .hero-title { font-size: clamp(3rem, 5vw, 4.5rem); }
+  .hero-title { font-size: clamp(3.5rem, 5.8vw, 5.25rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sparkles span {
+    animation: none;
+  }
 }

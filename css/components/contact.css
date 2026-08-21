@@ -29,6 +29,9 @@
   opacity: 0.7;
 }
 
+/* ========================================
+   CONTACT GRID & LAYOUT
+   ======================================== */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -36,21 +39,42 @@
   align-items: start;
   position: relative;
   z-index: 1;
+  max-width: 850px;
+  margin: 0 auto;
 }
 
+/* 2 Kolum hanya jika ada contact-form di sebelah */
 @media (min-width: 900px) {
-  .contact-grid {
+  .contact-grid:has(.contact-form) {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
+    max-width: 100%;
+  }
+
+  .contact-grid:has(.contact-form) .contact-info {
+    padding-right: var(--space-2xl);
   }
 }
 
+/* Layout Responsif (Mobile: 1 lajur, Desktop: Kiri & Kanan) */
 .contact-info {
-  padding-right: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  width: 100%;
 }
 
 @media (min-width: 900px) {
-  .contact-info { padding-right: var(--space-2xl); }
+  .contact-info {
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .contact-text {
+    position: sticky;
+    top: 100px; /* Teks kekal di atas bila scroll kad panjang */
+  }
 }
 
 .contact-header {
@@ -65,11 +89,25 @@
   line-height: 1.7;
 }
 
-/* Contact details - clean cards */
+/* ========================================
+   CONTACT DETAILS & CARDS
+   ======================================== */
 .contact-details {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  width: 100%;
+}
+
+@media (min-width: 650px) {
+  .contact-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Lokasi ambil 2 kolum penuh sebab alamat panjang */
+  .contact-item:nth-child(2) {
+    grid-column: span 2;
+  }
 }
 
 .contact-item {
@@ -227,7 +265,7 @@ textarea.form-input {
   padding: 0 var(--space-xs);
 }
 
-/* Textarea label adjustment — different starting position */
+/* Textarea label adjustment */
 textarea.form-input ~ .form-label {
   top: var(--space-lg);
   transform: translateY(0);
@@ -302,22 +340,78 @@ textarea.form-input:not(:placeholder-shown) ~ .form-label {
   flex-shrink: 0;
 }
 
-/* Mobile: bottom-sheet style */
+
+/* ========================================
+   FLOATING WHATSAPP BUBBLE
+   ======================================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: var(--space-2xl);
+  right: var(--space-2xl);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+  z-index: var(--z-toast);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  animation: whatsapp-pulse 2.5s ease-in-out infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 12px 36px rgba(37, 211, 102, 0.55);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.95);
+}
+
+.whatsapp-float svg {
+  transition: transform var(--transition-fast);
+}
+
+.whatsapp-float:hover svg {
+  transform: rotate(-8deg);
+}
+
+@keyframes whatsapp-pulse {
+  0%, 100% {
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45), 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .whatsapp-float {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 56px;
+    height: 56px;
+  }
+  
+  .whatsapp-float svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    animation: none;
+  }
+}
+
+/* Mobile responsive for contact section (without form) */
 @media (max-width: 640px) {
   .contact-form {
     padding: var(--space-xl) var(--space-lg);
-  }
-  
-  .form-success {
-    bottom: var(--space-lg);
-    right: var(--space-md);
-    left: var(--space-md);
-    padding: var(--space-md) var(--space-lg);
-    font-size: var(--text-sm);
-    transform: translateY(150%);
-  }
-  
-  .form-success.show {
-    transform: translateY(0);
   }
 }

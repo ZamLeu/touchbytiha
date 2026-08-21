@@ -37,7 +37,7 @@ export async function initTestimonials() {
     });
 
     // Enable user drag/swipe scrolling
-    enableUserScroll(wrapper, track, testimonials.length);
+    enableUserScroll(wrapper, track);
 
   } catch (error) {
     console.error('Testimonials error:', error);
@@ -49,218 +49,120 @@ export async function initTestimonials() {
  * Enable user drag/swipe scrolling while keeping auto-scroll
  * @param {HTMLElement} wrapper - .testimonials-wrapper
  * @param {HTMLElement} track - .testimonials-track
- * @param {number} originalCount - number of original (non-clone) items
  */
-function enableUserScroll(wrapper, track, originalCount) {
-  let isDragging = false;
-  let startX = 0;
-  let startTranslateX = 0;
+function enableUserScroll(wrapper, track) {
+  const AUTO_SCROLL_SPEED = 72;
+  const DRAG_THRESHOLD = 5;
+  const CARD_WIDTH = 300 + 24;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let offset = 0;
+  let activePointerId = null;
   let dragStartX = 0;
-  let dragStartTranslateX = 0;
-  let autoScrollPaused = false;
-  let velocity = 0;
-  let lastX = 0;
-  let lastTime = 0;
-  const DRAG_THRESHOLD = 5; // pixels
+  let lastPointerX = 0;
+  let hasDragged = false;
+  let suppressClick = false;
+  let clearClickSuppression = null;
+  let lastFrameTime = null;
 
-  // Get current translateX from transform
-  function getTranslateX() {
-    const style = getComputedStyle(track);
-    const matrix = style.transform.match(/matrix\((.+)\)/);
-    if (matrix) {
-      return parseFloat(matrix[1].split(', ')[4]) || 0;
-    }
-    return 0;
+  function loopWidth() {
+    return track.scrollWidth / 2;
   }
 
-  // Set translateX
-  function setTranslateX(x) {
-    track.style.transform = `translateX(${x}px)`;
+  function normalizeOffset() {
+    const width = loopWidth();
+    if (!width) return;
+    offset = ((offset % width) + width) % width;
   }
 
-  // Pause auto-scroll animation
-  function pauseAutoScroll() {
-    if (!autoScrollPaused) {
-      track.style.animationPlayState = 'paused';
-      autoScrollPaused = true;
+  function render() {
+    track.style.transform = `translateX(${-offset}px)`;
+  }
+
+  function autoScroll(timestamp) {
+    if (lastFrameTime !== null && activePointerId === null && !reducedMotion) {
+      offset += AUTO_SCROLL_SPEED * ((timestamp - lastFrameTime) / 1000);
+      normalizeOffset();
+      render();
+    }
+    lastFrameTime = timestamp;
+    requestAnimationFrame(autoScroll);
+  }
+
+  function onPointerDown(event) {
+    if (event.button !== undefined && event.button !== 0) return;
+
+    activePointerId = event.pointerId;
+    dragStartX = event.clientX;
+    lastPointerX = event.clientX;
+    hasDragged = false;
+    wrapper.setPointerCapture(event.pointerId);
+    wrapper.classList.add('is-dragging');
+  }
+
+  function onPointerMove(event) {
+    if (event.pointerId !== activePointerId) return;
+
+    const distance = event.clientX - dragStartX;
+    if (!hasDragged && Math.abs(distance) > DRAG_THRESHOLD) {
+      hasDragged = true;
+    }
+    if (!hasDragged) return;
+
+    event.preventDefault();
+    offset -= event.clientX - lastPointerX;
+    normalizeOffset();
+    render();
+    lastPointerX = event.clientX;
+  }
+
+  function onPointerUp(event) {
+    if (event.pointerId !== activePointerId) return;
+
+    // Only swallow the synthetic click emitted immediately after a drag.
+    // A later, intentional tap must still open the full-size image.
+    suppressClick = event.type === 'pointerup' && hasDragged;
+    clearTimeout(clearClickSuppression);
+    if (suppressClick) {
+      clearClickSuppression = setTimeout(() => {
+        suppressClick = false;
+      }, 0);
+    }
+    activePointerId = null;
+    wrapper.classList.remove('is-dragging');
+    if (wrapper.hasPointerCapture(event.pointerId)) {
+      wrapper.releasePointerCapture(event.pointerId);
     }
   }
 
-  // Resume auto-scroll animation
-  function resumeAutoScroll() {
-    if (autoScrollPaused) {
-      track.style.animationPlayState = 'running';
-      autoScrollPaused = false;
-    }
-  }
+  wrapper.addEventListener('pointerdown', onPointerDown);
+  wrapper.addEventListener('pointermove', onPointerMove);
+  wrapper.addEventListener('pointerup', onPointerUp);
+  wrapper.addEventListener('pointercancel', onPointerUp);
+  wrapper.addEventListener('click', (event) => {
+    if (!suppressClick) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    suppressClick = false;
+  }, true);
 
-  // Snap to nearest valid position (prevent getting stuck between items)
-  function snapToValidPosition() {
-    const cardWidth = 300 + 24; // card width + gap (var(--space-lg) = 24px)
-    const maxShift = cardWidth * originalCount; // 50% of duplicated track
-    let currentX = getTranslateX();
-    
-    // Normalize to 0 to -maxShift range
-    while (currentX > 0) currentX += maxShift;
-    while (currentX < -maxShift) currentX -= maxShift;
-    
-    // Snap to nearest card boundary
-    const snapped = Math.round(currentX / cardWidth) * cardWidth;
-    const clamped = Math.max(-maxShift, Math.min(0, snapped));
-    
-    setTranslateX(clamped);
-  }
-
-  // Pointer/mouse down
-  function onPointerDown(e) {
-    // Record initial position but don't start drag yet
-    // We'll start drag only after movement threshold (prevents click interception)
-    const card = e.target.closest('.testimonial-card');
-    const isOriginalCard = card && card.hasAttribute('tabindex') !== false;
-    
-    startX = e.clientX || (e.touches?.[0]?.clientX ?? 0);
-    startTranslateX = getTranslateX();
-    lastX = startX;
-    lastTime = performance.now();
-    velocity = 0;
-    
-    track.style.transition = 'none';
-    track.style.cursor = 'grabbing';
-    
-    // Don't preventDefault on original cards - let click work
-    if (!isOriginalCard) {
-      e.preventDefault();
-    }
-    
-    // Mark potential drag
-    isDragging = false;
-    dragStartX = startX;
-    dragStartTranslateX = startTranslateX;
-  }
-
-  // Pointer/mouse move
-  function onPointerMove(e) {
-    if (!isDragging) {
-      // Check if movement exceeds threshold
-      const currentX = e.clientX || (e.touches?.[0]?.clientX ?? 0);
-      if (Math.abs(currentX - dragStartX) > DRAG_THRESHOLD) {
-        isDragging = true;
-        pauseAutoScroll();
-        startX = dragStartX;
-        startTranslateX = dragStartTranslateX;
-      } else {
-        return;
-      }
-    }
-    
-    const currentX = e.clientX || (e.touches?.[0]?.clientX ?? 0);
-    const deltaX = currentX - startX;
-    const newX = startTranslateX + deltaX;
-    
-    // Calculate velocity for momentum
-    const now = performance.now();
-    const dt = now - lastTime;
-    if (dt > 0) {
-      velocity = (currentX - lastX) / dt; // px per ms
-    }
-    lastX = currentX;
-    lastTime = now;
-    
-    setTranslateX(newX);
-  }
-
-  // Pointer/mouse up
-  function onPointerUp() {
-    if (!isDragging) {
-      // Was a click, not a drag - let click handler work
-      track.style.transition = '';
-      track.style.cursor = 'grab';
-      return;
-    }
-    
-    isDragging = false;
-    
-    track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-    track.style.cursor = 'grab';
-    
-    // Apply momentum scrolling
-    if (Math.abs(velocity) > 0.1) {
-      const momentumX = getTranslateX() + velocity * 300; // project ~300ms
-      setTranslateX(momentumX);
-      
-      // Snap after momentum
-      setTimeout(() => {
-        snapToValidPosition();
-        resumeAutoScroll();
-      }, 500);
-    } else {
-      snapToValidPosition();
-      resumeAutoScroll();
-    }
-    
-    // Restore transition for auto-scroll
-    setTimeout(() => {
-      track.style.transition = '';
-    }, 500);
-  }
-
-  // Mouse events
-  wrapper.addEventListener('mousedown', onPointerDown);
-  document.addEventListener('mousemove', onPointerMove);
-  document.addEventListener('mouseup', onPointerUp);
-  document.addEventListener('mouseleave', onPointerUp);
-
-  // Touch events
-  wrapper.addEventListener('touchstart', onPointerDown, { passive: false });
-  wrapper.addEventListener('touchmove', onPointerMove, { passive: false });
-  wrapper.addEventListener('touchend', onPointerUp);
-  wrapper.addEventListener('touchcancel', onPointerUp);
-
-  // Wheel scroll (horizontal)
-  let wheelResumeTimer = null;
-  wrapper.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      pauseAutoScroll();
-      track.style.transition = 'none';
-      setTranslateX(getTranslateX() + e.deltaX);
-      
-      // Debounce resume
-      clearTimeout(wheelResumeTimer);
-      wheelResumeTimer = setTimeout(() => {
-        track.style.transition = 'transform 0.3s ease';
-        snapToValidPosition();
-        resumeAutoScroll();
-      }, 150);
-    }
+  wrapper.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+    event.preventDefault();
+    offset += event.deltaX;
+    normalizeOffset();
+    render();
   }, { passive: false });
 
-  // Keyboard navigation
-  wrapper.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-      e.preventDefault();
-      pauseAutoScroll();
-      track.style.transition = 'transform 0.3s ease';
-      const cardWidth = 300 + 24;
-      const direction = e.key === 'ArrowLeft' ? -1 : 1;
-      setTranslateX(getTranslateX() + direction * cardWidth);
-      
-      setTimeout(() => {
-        snapToValidPosition();
-        resumeAutoScroll();
-      }, 300);
-    }
+  wrapper.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    offset += event.key === 'ArrowLeft' ? -CARD_WIDTH : CARD_WIDTH;
+    normalizeOffset();
+    render();
   });
 
-  // Pause auto-scroll on hover/focus (existing CSS handles this too)
-  wrapper.addEventListener('mouseenter', pauseAutoScroll);
-  wrapper.addEventListener('focusin', pauseAutoScroll);
-  wrapper.addEventListener('mouseleave', resumeAutoScroll);
-  wrapper.addEventListener('focusout', resumeAutoScroll);
-
-  // Ensure cursor style
-  wrapper.style.cursor = 'grab';
   wrapper.style.userSelect = 'none';
+  requestAnimationFrame(autoScroll);
 }
 
 function createTestimonialCard(testimonial, isClone = false) {
@@ -268,23 +170,22 @@ function createTestimonialCard(testimonial, isClone = false) {
   article.className = 'testimonial-card';
   article.setAttribute('role', 'listitem');
 
-  if (!isClone) {
-    article.setAttribute('tabindex', '0');
-    article.setAttribute('aria-label', `View full image of ${testimonial.name} — ${testimonial.event}`);
-    article.addEventListener('click', () => {
-      openLightbox({
-        src: testimonial.img,
-        alt: testimonial.alt,
-        caption: `${testimonial.name} — ${testimonial.event}`
-      });
+  // Add click/keyboard handlers to ALL cards (including clones for infinite scroll)
+  article.setAttribute('tabindex', '0');
+  article.setAttribute('aria-label', `View full image of ${testimonial.name} — ${testimonial.event}`);
+  article.addEventListener('click', () => {
+    openLightbox({
+      src: testimonial.img,
+      alt: testimonial.alt,
+      caption: `${testimonial.name} — ${testimonial.event}`
     });
-    article.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        article.click();
-      }
-    });
-  }
+  });
+  article.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      article.click();
+    }
+  });
 
   article.innerHTML = `
     <img

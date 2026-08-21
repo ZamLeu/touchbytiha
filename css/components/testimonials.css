@@ -65,16 +65,14 @@
 .testimonials-track {
   display: flex;
   gap: var(--space-lg);
-  animation: scroll-left 30s linear infinite;
+  animation: none;
   will-change: transform;
-  /* Allow transform manipulation via JS */
   transform-origin: 0 50%;
 }
 
-/* Pause on hover/focus */
-.testimonials-wrapper:hover .testimonials-track,
-.testimonials-wrapper:focus-within .testimonials-track {
-  animation-play-state: paused;
+.testimonials-wrapper.is-dragging,
+.testimonials-wrapper.is-dragging .testimonial-card {
+  cursor: grabbing;
 }
 
 /* ========================================
@@ -195,23 +193,4 @@
   width: 10px;
   height: 10px;
   flex-shrink: 0;
-}
-
-/* ========================================
-   ANIMATION
-   ======================================== */
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .testimonials-track {
-    animation: none;
-  }
 }

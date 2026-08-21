@@ -240,7 +240,10 @@ function updateContent() {
   lightboxContent.src = item.src;
   lightboxContent.alt = item.alt;
   lightboxContent.style.opacity = '1'; // Ensure visible
-  lightboxCaption.textContent = item.category ? `${item.category} — ${item.title}` : item.title;
+  
+    // No caption text — image only
+  lightboxCaption.textContent = '';
+  
   if (lightboxCounter) {
     lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
   }

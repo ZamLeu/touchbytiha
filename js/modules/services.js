@@ -20,8 +20,8 @@ export function renderServices(services) {
   const grid = $('.services-grid');
   if (!grid) return;
 
-  // Make the first service (Bridal) the primary/featured one
-  const primaryIndex = 0;
+  // Make Event & Party Makeup the primary/featured one (Most Popular)
+  const primaryIndex = 2;
 
   grid.innerHTML = services.map((service, i) => {
     const iconKey = service.title.toLowerCase().includes('bridal') ? 'bridal' :

@@ -18,6 +18,12 @@
       "alt": "Customer feedback screenshot 3",
       "name": "Nurul H.",
       "event": "Event Makeup"
+    },
+    {
+      "img": "images/portfolio/test4.png",
+      "alt": "Customer feedback screenshot 4",
+      "name": "Aina M.",
+      "event": "Event Makeup"
     }
   ]
 }

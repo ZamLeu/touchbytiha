@@ -1,0 +1,59 @@
+{
+  "portfolio": [
+    {
+      "img": "images/portfolio/result10.jpg",
+      "alt": "Bridal makeup elegance and grace",
+      "category": "Bridal",
+      "title": "Timeless Elegance",
+      "featured": true
+    },
+    {
+      "img": "images/portfolio/result1.jpg",
+      "alt": "Bridal makeup with soft warm tones",
+      "category": "Bridal",
+      "title": "Bridal Radiance"
+    },
+    {
+      "img": "images/portfolio/result2.jpg",
+      "alt": "Soft and elegant bridal look",
+      "category": "Bridal",
+      "title": "Soft Glam Bride"
+    },
+    {
+      "img": "images/portfolio/result3.jpg",
+      "alt": "Editorial golden hour makeup look",
+      "category": "Editorial",
+      "title": "Golden Hour"
+    },
+    {
+      "img": "images/portfolio/result4.jpg",
+      "alt": "Creative editorial makeup styling",
+      "category": "Creative",
+      "title": "Artistry in Motion"
+    },
+    {
+      "img": "images/portfolio/result5.jpg",
+      "alt": "Glamorous event makeup",
+      "category": "Event",
+      "title": "Evening Elegance"
+    },
+    {
+      "img": "images/portfolio/result6.jpg",
+      "alt": "Natural barely-there makeup",
+      "category": "Natural",
+      "title": "Natural Glow"
+    },
+    {
+      "img": "images/portfolio/result7.jpg",
+      "alt": "Dramatic evening makeup look",
+      "category": "Evening",
+      "title": "Drama & Grace"
+    },
+    {
+      "img": "images/portfolio/result11.png",
+      "alt": "Portrait beauty makeup",
+      "category": "Portrait",
+      "title": "Portrait Perfection"
+    }
+  ]
+}

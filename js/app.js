@@ -7,7 +7,6 @@ import { initTheme } from './modules/theme.js';
 import { initMobileMenu, initHeaderScroll, initActiveLink } from './modules/navigation.js';
 import { renderPortfolio, initLightbox } from './modules/gallery.js';
 import { renderServices } from './modules/services.js';
-import { initForm } from './modules/form.js';
 import { initHeroAnimation, initRevealObserver } from './modules/animations.js';
 import { initTestimonials } from './modules/testimonials.js';
 
@@ -42,9 +41,6 @@ async function bootstrap() {
     initHeroAnimation();
     initRevealObserver();
 
-    // Initialize form
-    initForm();
-
     console.log(`✨ touchbytiha — ready (${portfolio.length} portfolio items, ${services.length} services)`);
   } catch (error) {
     console.error('Failed to initialize application:', error);
@@ -54,7 +50,6 @@ async function bootstrap() {
     initHeaderScroll();
     initMobileMenu();
     initActiveLink();
-    initForm();
     initRevealObserver();
   }
 }
