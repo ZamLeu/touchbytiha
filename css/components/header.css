@@ -211,11 +211,11 @@
     display: flex;
   }
 
-  /* Hide desktop nav in header on mobile
+  /* Hide desktop nav in header on mobile */
   .header > .nav:not(.open) {
     display: none;
   }
-   */
+  
   /* Mobile navigation drawer - fixed to viewport, not header */
   .nav {
     position: fixed;
@@ -235,7 +235,7 @@
     border-left: 1px solid var(--glass-border);
     transform: translateX(100%);
     transition: transform var(--transition-slow);
-    z-index: 9998; /* Above header + backdrop */
+    z-index: calc(var(--z-fixed) + 2); /* Above header + backdrop */
     overflow-y: auto;
     /* Force new stacking context to escape header's backdrop-filter containing block */
     isolation: isolate;

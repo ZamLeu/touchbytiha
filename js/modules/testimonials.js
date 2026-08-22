@@ -51,7 +51,7 @@ export async function initTestimonials() {
  * @param {HTMLElement} track - .testimonials-track
  */
 function enableUserScroll(wrapper, track) {
-  const AUTO_SCROLL_SPEED = 72;
+  const AUTO_SCROLL_SPEED = 40;
   const DRAG_THRESHOLD = 5;
   const CARD_WIDTH = 300 + 24;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

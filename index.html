@@ -11,6 +11,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 
+  <script>
+    (function() {
+      try {
+        var stored = localStorage.getItem('touchbytiha-theme');
+        if (stored === 'dark' || stored === 'light') {
+          // 1. Ikut apa yang user pernah pilih kat butang (kalau ada)
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          // 2. Kalau takde rekod, kita check phone dia. Kalau phone dark mode, web jadi dark mode.
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        // Kalau phone dia light mode, tak payah set atribut sebab CSS kau memang asasnya light.
+      } catch (e) {}
+    })();
+  </script>
+  
   <!-- Modular CSS -->
   <link rel="stylesheet" href="css/index.css">
 
@@ -20,13 +36,12 @@
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💄</text></svg>">
-</head>
+<link rel="icon" type="image/png" href="images/thumbs/icon.png"></head>
 <body>
   <!-- Header & Navigation -->
   <header class="header" role="banner">
     <a href="#" class="logo" aria-label="touchbytiha Home">
-      <span class="logo-icon" aria-hidden="true">💄</span>
+      <img src="images/thumbs/icon.png" alt="" width="28" height="28">
       <span class="logo-text">touchby<span>tiha.</span></span>
     </a>
     <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -72,8 +87,7 @@
       <article class="hero-content">
         <h1 class="hero-title">touchbytiha.</h1>
         <p class="hero-subtitle">
-          Elevating beauty through artistry — bespoke makeup for brides,
-          editorials, and the moments that matter.
+         Enhancing your natural beauty for the days you want to feel your absolute best.
         </p>
         <div class="hero-cta">
           <a href="#portfolio" class="btn btn-primary">
@@ -122,18 +136,10 @@
               <h2 id="about-title" class="section-title">The Artist <span class="accent">Behind the Brush</span></h2>
             </header>
             <p class="about-text">
-              I'm a part-time makeup artist — and I wouldn't have it any
-              other way. Makeup is my side passion, my creative outlet
-              between life's other roles. It's that balance that keeps me
-              hungry, humble, and genuinely excited each time a new face
-              sits in my chair — so every look still feels authentically
-              <em>you</em>, only more radiant.
+              I'm a part-time makeup artist, and honestly, I love it that way. Makeup is my creative escape from the busy everyday life. Keeping it as a side passion makes me genuinely excited every single time someone new sits in my chair. My goal is simple, I just want you to look and feel authentically <em>you</em>, but with an extra touch of radiance.
             </p>
             <p class="about-text">
-              Bridal glow, editorial drama, or an everyday soft-glam moment —
-              whatever you're celebrating, I bring the joy of doing what I
-              love, and leave every face with a little extra confidence,
-              color, and just a bit of magic.
+               Whether it is for your wedding day, a special event, or just a simple soft-glam moment, I'm here for it. I bring all my love for makeup into every session, hoping you will leave with a big smile, more confidence, and a little bit of magic.
             </p>
 
           </div>
@@ -265,15 +271,15 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="logo" aria-label="touchbytiha Home">
-          <span class="logo-icon" aria-hidden="true">💄</span>
+          <img src="images/thumbs/icon.png" alt="" width="28" height="28">
           <span class="logo-text">touchby<span>tiha</span></span>
         </a>
-        <p>Elevating beauty through artistry — bespoke makeup for the modern bride and beyond.</p>
-        <div class="social-links" role="list" aria-label="Social links">
-          <a href="https://instagram.com/touchbytiha" class="social-link" aria-label="Instagram" target="_blank" rel="noopener" role="listitem">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        
+        <!-- <div class="social-links" role="list" aria-label="Social links">
+          <a href="https://www.threads.com/@touchbytiha?xmt=AQG0XGfkINoz5TRSDHWOtwQWJUx2RrBAps6THjWgGfcDeYE" class="social-link" aria-label="Instagram" target="_blank" rel="noopener" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <path d="M12.186 24C5.457 24 0 18.625 0 12.012 0 5.398 5.457.023 12.186.023c5.385 0 9.774 3.447 11.007 8.653a1.144 1.144 0 0 1-.864 1.378 1.144 1.144 0 0 1-1.378-.864c-.995-4.204-4.579-7.007-8.765-7.007-5.467 0-9.897 4.354-9.897 9.83 0 5.475 4.43 9.829 9.897 9.829 4.186 0 7.77-2.803 8.765-7.007a1.144 1.144 0 0 1 1.378-.864 1.144 1.144 0 0 1 .864 1.378C21.96 20.553 17.571 24 12.186 24zM16.5 11.23c-.11-.53-.41-.98-.86-1.3-1.07-.76-2.58-.75-3.66.02-.95.68-1.5 1.77-1.5 2.95 0 1.2.56 2.3 1.52 2.97.74.52 1.63.74 2.5.64.93-.11 1.74-.63 2.24-1.42.34-.54.2-1.25-.33-1.6-.54-.34-1.25-.2-1.6.34-.23.36-.59.59-1 .64-.42.05-.84-.05-1.18-.3-.43-.3-.68-.79-.68-1.32s.25-1.02.67-1.31c.49-.35 1.17-.35 1.66 0 .2.14.33.34.38.57.1.51.55.87 1.07.87.06 0 .12 0 .18-.02.57-.1.95-.65.85-1.22z"/>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
@@ -282,7 +288,7 @@
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
           </a>
-        </div>
+        </div> -->
       </div>
       <nav class="footer-nav" aria-label="Quick links">
         <h3 class="footer-title">Quick Links</h3>
@@ -306,12 +312,12 @@
         <ul class="footer-links">
           <li><a href="mailto:tihahfadir@gmail.com">tihahfadir@gmail.com</a></li>
           <li><a href="https://wa.me/601137708023" target="_blank" rel="noopener">011-3770 8023</a></li>
-          <li><a href="https://instagram.com/touchbytiha" target="_blank" rel="noopener">@touchbytiha</a></li>
+          <!-- <li><a href="https://instagram.com/touchbytiha" target="_blank" rel="noopener">@touchbytiha</a></li> -->
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copyright">&copy; 2025 touchbytiha. All rights reserved.</p>
+      <p class="footer-copyright">&copy; 2026 touchbytiha. All rights reserved.</p>
       <nav class="footer-legal" aria-label="Legal links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
