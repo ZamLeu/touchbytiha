@@ -4,7 +4,6 @@
  */
 
 import { $, $$ } from '../utils/dom.js';
-import { scrollLock } from '../utils/dom.js';
 
 /**
  * Initialize mobile menu
@@ -18,14 +17,12 @@ export function initMobileMenu() {
     nav.classList.add('open');
     btn.setAttribute('aria-expanded', 'true');
     btn.setAttribute('aria-label', 'Close menu');
-    scrollLock(true);
   }
 
   function close() {
     nav.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', 'Open menu');
-    scrollLock(false);
   }
 
   btn.addEventListener('click', () => {

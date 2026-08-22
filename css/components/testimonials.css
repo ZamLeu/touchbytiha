@@ -18,8 +18,9 @@
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 800px;
+  width: 80%;
   height: 500px;
+  max-width: 800px;
   background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;

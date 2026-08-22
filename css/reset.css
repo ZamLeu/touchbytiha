@@ -39,7 +39,18 @@ body {
   color: var(--fg);
   background: var(--bg);
   overflow-x: hidden;
+  /* Prevent any horizontal scroll completely */
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
   transition: background var(--transition-slow), color var(--transition-slow);
+}
+
+/* Ensure html also constrains width */
+html {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* Images */
