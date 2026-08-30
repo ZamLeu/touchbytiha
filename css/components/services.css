@@ -227,3 +227,127 @@
     height: 44px;
   }
 }
+
+/* Add-ons row */
+.services-addons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 600px) {
+  .services-addons { grid-template-columns: repeat(3, 1fr); }
+}
+
+.service-card.addon {
+  padding: var(--space-lg) var(--space-md);
+  min-height: auto;
+  border-color: var(--border);
+}
+
+.service-card.addon:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--accent-soft);
+}
+
+.service-card.addon .service-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-elevated);
+}
+
+.service-card.addon .service-title {
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.service-card.addon .service-desc { display: none; }
+
+.service-card.addon .service-footer {
+  padding-top: var(--space-md);
+  justify-content: center;
+}
+
+.service-card.addon .service-price {
+  font-size: var(--text-lg);
+}
+
+.service-card.addon .service-link { display: none; }
+
+/* Accordion for additional services */
+.services-accordion {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+.accordion-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+  background: var(--card);
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  gap: var(--space-md);
+  transition: color var(--transition-fast);
+}
+
+.accordion-trigger:hover,
+.accordion-trigger:focus {
+  color: var(--accent);
+  outline: none;
+}
+
+.accordion-trigger:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.accordion-title {
+  font-weight: 500;
+  font-size: var(--text-base);
+}
+
+.accordion-price {
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+  font-family: var(--font-display);
+}
+
+.accordion-desc {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base), padding var(--transition-base);
+  padding: 0 var(--space-lg);
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  background: var(--bg);
+}
+
+.accordion-desc.open {
+  max-height: 200px;
+  padding: var(--space-sm) var(--space-lg) var(--space-md);
+}
+
+.accordion-desc p {
+  margin: 0;
+}

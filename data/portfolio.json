@@ -8,12 +8,6 @@
       "featured": true
     },
     {
-      "img": "images/portfolio/result1.jpg",
-      "alt": "Bridal makeup with soft warm tones",
-      "category": "Bridal",
-      "title": "Bridal Radiance"
-    },
-    {
       "img": "images/portfolio/result2.jpg",
       "alt": "Soft and elegant bridal look",
       "category": "Bridal",
@@ -42,24 +36,6 @@
       "alt": "Natural barely-there makeup",
       "category": "Natural",
       "title": "Natural Glow"
-    },
-    {
-      "img": "images/portfolio/result7.jpg",
-      "alt": "Dramatic evening makeup look",
-      "category": "Evening",
-      "title": "Drama & Grace"
-    },
-    {
-      "img": "images/portfolio/result11.png",
-      "alt": "Portrait beauty makeup",
-      "category": "Portrait",
-      "title": "Portrait Perfection"
-    },
-    {
-      "img": "images/portfolio/result12.jpg",
-      "alt": "Stunning bridal makeup look",
-      "category": "Bridal",
-      "title": "Bridal Dreams"
     }
   ]
 }

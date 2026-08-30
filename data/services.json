@@ -1,23 +1,96 @@
 {
   "services": [
     {
-      "icon": "💄",
-      "title": "Bridal Makeup",
-      "desc": "Complete bridal look with trial session, premium lashes, and touch-up kit for your special day.",
-      "price": "RM 200"
+      "title": "Bridal",
+      "price": "RM200",
+      "type": "main",
+      "icon": "bridal",
+      "desc": "Complete bridal look with trial session, premium lashes, and touch-up kit for your special day."
     },
     {
-      "icon": "💍",
-      "title": "Engagement Makeup",
-      "desc": "Beautiful engagement ceremony look with trial session and long-lasting wear.",
-      "price": "RM 130"
+      "title": "Engagement",
+      "price": "RM150",
+      "type": "main",
+      "icon": "engagement",
+      "desc": "Beautiful engagement ceremony look with trial session and long-lasting wear."
     },
     {
-      "icon": "✨",
-      "title": "Event & Party Makeup",
-      "desc": "Glam makeup for events, parties, and celebrations that lasts all night long.",
-      "price": "RM 100"
+      "title": "Event",
+      "price": "RM90",
+      "type": "main",
+      "icon": "event",
+      "desc": "Glam makeup for events, parties, and celebrations that lasts all night long."
+    },
+    {
+      "title": "Dinner",
+      "price": "RM100",
+      "type": "main",
+      "icon": "default",
+      "desc": "Elegant dinner makeup look tailored to your style."
+    },
+    {
+      "title": "Photoshoot",
+      "price": "RM100",
+      "type": "main",
+      "icon": "default",
+      "desc": "Camera-ready makeup for professional or personal photoshoots."
+    },
+    {
+      "title": "Birthday",
+      "price": "RM90",
+      "type": "main",
+      "icon": "default",
+      "desc": "Celebrate your special day with a gorgeous makeup look."
+    },
+    {
+      "title": "Convocation",
+      "price": "RM90",
+      "type": "main",
+      "icon": "default",
+      "desc": "Polished graduation makeup that looks great in photos."
+    },
+    {
+      "title": "Hi-Tea",
+      "price": "RM90",
+      "type": "main",
+      "icon": "default",
+      "desc": "Fresh, radiant makeup perfect for daytime gatherings."
+    },
+    {
+      "title": "Kenduri",
+      "price": "RM90",
+      "type": "main",
+      "icon": "default",
+      "desc": "Traditional event makeup with long-lasting wear."
+    },
+    {
+      "title": "Bridesmaid",
+      "price": "RM90",
+      "type": "main",
+      "icon": "default",
+      "desc": "Coordinated bridesmaid makeup to complement the bridal party."
+    },
+    {
+      "title": "Fake Eyelashes",
+      "price": "+RM5",
+      "type": "addon",
+      "icon": "addon",
+      "desc": ""
+    },
+    {
+      "title": "Contact Lens",
+      "price": "+RM25",
+      "type": "addon",
+      "icon": "addon",
+      "desc": ""
+    },
+    {
+      "title": "Simple Hijab Styling",
+      "price": "+RM10",
+      "type": "addon",
+      "icon": "addon",
+      "desc": ""
     }
   ],
-  "note": "Prices do not include transportation fee"
+  "note": "Prices do not include transportation fee. Area: Ipoh, Perak. Contact lens requires 1 week advance notice."
 }
