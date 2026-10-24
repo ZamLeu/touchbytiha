@@ -3,7 +3,7 @@
  * Portfolio rendering and lightbox
  */
 
-import { $, $$, scrollLock } from '../utils/dom.js';
+import { $, $$, scrollLock, escape } from '../utils/dom.js';
 
 let portfolioImages = [];   // Immutable backup of portfolio items
 let images = [];            // Current active images (portfolio or single)
@@ -42,17 +42,17 @@ export function renderPortfolio(items) {
       role="listitem"
       tabindex="0"
       data-index="${i}"
-      aria-label="View ${item.title} - ${item.category}"
+      aria-label="View ${escape(item.title)} - ${escape(item.category)}"
     >
       <img
-        src="${item.img}"
-        alt="${item.alt}"
+        src="${escape(item.img)}"
+        alt="${escape(item.alt)}"
         loading="${i < 4 ? 'eager' : 'lazy'}"
         decoding="async"
       >
       <div class="portfolio-overlay">
-        <span class="portfolio-category">${item.category}</span>
-        <h3 class="portfolio-title">${item.title}</h3>
+        <span class="portfolio-category">${escape(item.category)}</span>
+        <h3 class="portfolio-title">${escape(item.title)}</h3>
       </div>
     </article>
   `).join('');
@@ -159,44 +159,43 @@ export function openLightbox({ src, alt, caption }) {
 }
 
 /**
+ * Show the lightbox and start its fade-in.
+ * The forced reflow replaces requestAnimationFrame here: if the frame loop is
+ * throttled (background tab, some embedded webviews) the overlay would
+ * otherwise stay at opacity 0 while marked visible.
+ */
+function revealLightbox() {
+  updateContent();
+  lightbox.hidden = false;
+  lightbox.classList.remove('loading');
+  void lightbox.offsetWidth;
+  lightbox.classList.add('open');
+  isTransitioning = false;
+  scrollLock(true);
+  $('.lightbox-close', lightbox)?.focus();
+}
+
+/**
  * Preload image before showing lightbox for smooth transition
  */
 function openLightboxWithPreload() {
   const item = images[currentIndex];
   if (!item) return;
-  
+
   isTransitioning = true;
-  
+
   // Add loading class
   lightbox.classList.add('loading');
-  
+
   // Preload the image
   const img = new Image();
-  img.onload = () => {
-    updateContent();
-    lightbox.hidden = false;
-    lightbox.classList.remove('loading');
-    requestAnimationFrame(() => {
-      lightbox.classList.add('open');
-      isTransitioning = false;
-    });
-    scrollLock(true);
-    $('.lightbox-close', lightbox)?.focus();
-  };
-  
+  img.onload = revealLightbox;
+
   img.onerror = () => {
     // Fallback: show anyway even if image fails
-    updateContent();
-    lightbox.hidden = false;
-    lightbox.classList.remove('loading');
-    requestAnimationFrame(() => {
-      lightbox.classList.add('open');
-      isTransitioning = false;
-    });
-    scrollLock(true);
-    $('.lightbox-close', lightbox)?.focus();
+    revealLightbox();
   };
-  
+
   img.src = item.src;
 }
 
@@ -216,11 +215,11 @@ function navigate(direction) {
     const img = new Image();
     img.onload = () => {
       updateContent();
-      // Fade in new image
-      requestAnimationFrame(() => {
-        lightboxContent.style.opacity = '1';
-        isTransitioning = false;
-      });
+      // Fade in new image (forced reflow keeps the transition reliable when
+      // the frame loop is throttled)
+      void lightboxContent.offsetWidth;
+      lightboxContent.style.opacity = '1';
+      isTransitioning = false;
     };
     
     img.onerror = () => {

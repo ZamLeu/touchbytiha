@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — touchbytiha</title>
+  <meta name="theme-color" content="#fdf8f5">
+  <link rel="icon" type="image/png" href="../images/thumbs/icon.png">
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('touchbytiha-theme');
+        if (stored === 'dark' || stored === 'light') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <!-- Login -->
+  <section class="login-screen" id="login-screen">
+    <div class="login-card">
+      <img class="login-logo" src="../images/thumbs/icon.png" alt="" width="48" height="48">
+      <h1 class="login-title">touchbytiha<span>.</span> admin</h1>
+      <p class="login-sub">Sign in to manage the site.</p>
+
+      <form id="login-form" class="login-form" novalidate>
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input class="input" type="email" name="email" autocomplete="username" inputmode="email" required>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Password</span>
+          <div class="password-wrap">
+            <input class="input" type="password" name="password" autocomplete="current-password" required>
+            <button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
+        </label>
+
+        <p class="form-error" id="login-error" role="alert" hidden></p>
+
+        <button class="btn btn-primary btn-block" type="submit" id="login-submit">Sign in</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Panel -->
+  <div class="admin-shell" id="admin-shell" hidden>
+    <header class="admin-header">
+      <div class="admin-brand">
+        <img src="../images/thumbs/icon.png" alt="" width="26" height="26">
+        <span>touchbytiha.</span>
+      </div>
+      <div class="admin-header-actions">
+        <span class="status-dot" id="save-status" aria-live="polite"></span>
+        <button class="btn btn-ghost btn-sm" type="button" id="logout-btn">Log out</button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Admin sections">
+      <button class="tab is-active" role="tab" id="tab-btn-portfolio" aria-controls="panel-portfolio" aria-selected="true" data-tab="portfolio">Portfolio</button>
+      <button class="tab" role="tab" id="tab-btn-testimonials" aria-controls="panel-testimonials" aria-selected="false" data-tab="testimonials">Testimonials</button>
+      <button class="tab" role="tab" id="tab-btn-services" aria-controls="panel-services" aria-selected="false" data-tab="services">Services</button>
+      <button class="tab" role="tab" id="tab-btn-note" aria-controls="panel-note" aria-selected="false" data-tab="note">Note</button>
+      <button class="tab" role="tab" id="tab-btn-tools" aria-controls="panel-tools" aria-selected="false" data-tab="tools">Tools</button>
+    </nav>
+
+    <main class="admin-main">
+      <section class="panel" id="panel-portfolio" role="tabpanel" aria-labelledby="tab-btn-portfolio">
+        <div class="panel-head">
+          <h2>Portfolio</h2>
+          <button class="btn btn-primary btn-sm" type="button" data-add="portfolio">+ Add image</button>
+        </div>
+        <p class="panel-hint">The first item marked <strong>Featured</strong> gets the large tile. Only one item can be featured.</p>
+        <ul class="admin-list" id="list-portfolio"></ul>
+      </section>
+
+      <section class="panel" id="panel-testimonials" role="tabpanel" aria-labelledby="tab-btn-testimonials" hidden>
+        <div class="panel-head">
+          <h2>Testimonials</h2>
+          <button class="btn btn-primary btn-sm" type="button" data-add="testimonials">+ Add screenshot</button>
+        </div>
+        <ul class="admin-list" id="list-testimonials"></ul>
+      </section>
+
+      <section class="panel" id="panel-services" role="tabpanel" aria-labelledby="tab-btn-services" hidden>
+        <div class="panel-head">
+          <h2>Services</h2>
+          <button class="btn btn-primary btn-sm" type="button" data-add="services">+ Add service</button>
+        </div>
+        <p class="panel-hint">The first 3 main services render as full cards; the rest go into the accordion. Add-ons render below.</p>
+        <h3 class="list-title">Main services</h3>
+        <ul class="admin-list" id="list-services-main"></ul>
+        <h3 class="list-title">Add-ons</h3>
+        <ul class="admin-list" id="list-services-addon"></ul>
+      </section>
+
+      <section class="panel" id="panel-note" role="tabpanel" aria-labelledby="tab-btn-note" hidden>
+        <div class="panel-head">
+          <h2>Services note</h2>
+        </div>
+        <p class="panel-hint">Shown under the Services section description.</p>
+        <form id="note-form" class="note-form">
+          <label class="field">
+            <span class="field-label">Note</span>
+            <textarea class="input" name="note" rows="4" placeholder="Prices do not include transportation fee…"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Save note</button>
+        </form>
+      </section>
+
+      <section class="panel" id="panel-tools" role="tabpanel" aria-labelledby="tab-btn-tools" hidden>
+        <div class="panel-head">
+          <h2>Tools</h2>
+        </div>
+        <div class="tool-card">
+          <h3>Storage orphans</h3>
+          <p class="panel-hint">Uploaded files that no longer belong to any item. Deleting them frees space and cannot be undone.</p>
+          <button class="btn btn-secondary btn-sm" type="button" id="scan-orphans">Scan for orphans</button>
+          <ul class="orphan-list" id="orphan-list"></ul>
+          <button class="btn btn-danger btn-sm" type="button" id="delete-orphans" hidden>Delete all orphans</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <span class="toast-text"></span>
+      <button class="toast-undo" type="button" id="toast-undo" hidden>Undo</button>
+      <button class="toast-close" type="button" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+  <dialog class="modal" id="editor-dialog">
+    <form method="dialog" class="modal-form" id="editor-form" novalidate>
+      <div class="modal-head">
+        <h2 id="editor-title">Edit</h2>
+        <button class="icon-btn" type="button" id="editor-close" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body" id="editor-fields"></div>
+      <p class="form-error" id="editor-error" role="alert" hidden></p>
+
+      <div class="editor-progress" id="editor-progress" hidden>
+        <div class="editor-progress-track">
+          <span class="editor-progress-fill"></span>
+        </div>
+        <p class="editor-progress-label" id="editor-progress-label" aria-live="polite"></p>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" type="button" id="editor-cancel">Cancel</button>
+        <button class="btn btn-primary" type="submit" id="editor-save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal modal-sm" id="confirm-dialog">
+    <form method="dialog" class="modal-form">
+      <div class="modal-head">
+        <h2 id="confirm-title">Confirm</h2>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-message"></p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" value="cancel" type="submit">Cancel</button>
+        <button class="btn btn-danger" value="ok" type="submit" id="confirm-ok">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="../js/admin/app.js"></script>
+</body>
+</html>

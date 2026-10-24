@@ -48,6 +48,18 @@ export const html = (strings, ...values) => {
 };
 
 /**
+ * Escape a value for safe interpolation into an HTML template string
+ * @param {*} value
+ * @returns {string}
+ */
+export const escape = (value) => String(value ?? '')
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
+
+/**
  * Lock / unlock body scrolling
  * @param {boolean} lock
  */

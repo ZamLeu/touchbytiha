@@ -86,15 +86,15 @@
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--surface);
+  background: var(--card);
   border: 1px solid var(--border);
   cursor: zoom-in;
-  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .testimonial-card:hover {
   border-color: var(--accent);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 12px 32px var(--shadow);
 }
 
 .testimonial-card:focus-visible {
@@ -129,7 +129,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  background: var(--bg-muted);
+  background: var(--bg-elevated);
 }
 
 /* ========================================
@@ -174,7 +174,7 @@
   top: var(--space-sm);
   right: var(--space-sm);
   background: var(--accent);
-  color: var(--accent-fg);
+  color: var(--fg-light);
   padding: 2px 8px;
   border-radius: var(--radius-full);
   font-size: 10px;
@@ -185,7 +185,7 @@
   align-items: center;
   gap: 4px;
   line-height: 1;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px var(--shadow);
   flex-shrink: 0;
   z-index: 2;
 }

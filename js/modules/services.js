@@ -3,7 +3,7 @@
  * Render service cards from JSON data
  */
 
-import { $, $$ } from '../utils/dom.js';
+import { $, $$, escape } from '../utils/dom.js';
 
 const SERVICE_ICONS = {
   bridal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
@@ -15,21 +15,31 @@ const SERVICE_ICONS = {
 
 /**
  * Render service cards
- * @param {Object[]} services - Service data array
+ * @param {Object[]} services - Service data array, already sorted by order
+ * @param {string} [note] - Optional note shown under the section header
  */
-export function renderServices(services) {
+export function renderServices(services, note) {
   const grid = $('.services-grid');
   const accordion = $('.services-accordion');
   const addonsGrid = $('.services-addons');
   if (!grid) return;
 
+  const noteEl = $('#services-note');
+  if (noteEl) {
+    if (note) {
+      noteEl.textContent = note;
+      noteEl.hidden = false;
+    } else {
+      noteEl.hidden = true;
+    }
+  }
+
   // Split into main services and add-ons
   const mainServices = services.filter(s => s.type === 'main');
   const addons = services.filter(s => s.type === 'addon');
 
-  // Featured (first 3): Bridal, Engagement, Event
+  // Featured (first 3) as full cards, rest as accordion
   const featured = mainServices.slice(0, 3);
-  // Additional (rest): Dinner, Photoshoot, Birthday, Convocation, Hi-Tea, Kenduri, Bridesmaid
   const additional = mainServices.slice(3);
 
   // Find Event index in featured for "Most Popular" badge
@@ -54,10 +64,10 @@ export function renderServices(services) {
         <div class="service-icon" aria-hidden="true">
           ${icon}
         </div>
-        <h3 class="service-title">${service.title}</h3>
-        <p class="service-desc">${service.desc}</p>
+        <h3 class="service-title">${escape(service.title)}</h3>
+        <p class="service-desc">${escape(service.desc)}</p>
         <div class="service-footer">
-          <span class="service-price">${service.price}</span>
+          <span class="service-price">${escape(service.price)}</span>
           <a href="#contact" class="service-link">
             Book Now
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -81,8 +91,8 @@ export function renderServices(services) {
           aria-controls="accordion-desc-${i}"
           data-index="${i}"
         >
-          <span class="accordion-title">${service.title}</span>
-          <span class="accordion-price">${service.price}</span>
+          <span class="accordion-title">${escape(service.title)}</span>
+          <span class="accordion-price">${escape(service.price)}</span>
         </button>
         <div 
           class="accordion-desc" 
@@ -90,20 +100,21 @@ export function renderServices(services) {
           role="region" 
           aria-hidden="true"
         >
-          <p>${service.desc}</p>
+          <p>${escape(service.desc)}</p>
         </div>
       </div>
     `).join('');
 
     // Initialize accordion interactions
     initAccordion(accordion);
+  } else if (accordion) {
+    accordion.innerHTML = '';
   }
 
   // Render add-ons if container exists
   if (addonsGrid && addons.length > 0) {
     addonsGrid.innerHTML = addons.map((service, i) => {
       const icon = SERVICE_ICONS.addon;
-
       return `
         <article 
           class="service-card addon reveal" 
@@ -113,13 +124,15 @@ export function renderServices(services) {
           <div class="service-icon" aria-hidden="true">
             ${icon}
           </div>
-          <h3 class="service-title">${service.title}</h3>
+          <h3 class="service-title">${escape(service.title)}</h3>
           <div class="service-footer">
-            <span class="service-price">${service.price}</span>
+            <span class="service-price">${escape(service.price)}</span>
           </div>
         </article>
       `;
     }).join('');
+  } else if (addonsGrid) {
+    addonsGrid.innerHTML = '';
   }
 }
 

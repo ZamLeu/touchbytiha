@@ -1,0 +1,8 @@
+node_modules/
+scripts/serviceAccount.json
+scripts/serviceAccount*.json
+.firebase/
+firebase-debug.log
+.DS_Store
+Thumbs.db
+.kilo/plans

@@ -4,17 +4,22 @@
  */
 
 import { openLightbox } from './gallery.js';
+import { escape } from '../utils/dom.js';
 
-export async function initTestimonials() {
+/**
+ * Render the testimonial carousel.
+ * @param {Object[]} testimonials - Already sorted by `order`
+ */
+export function initTestimonials(testimonials = []) {
   const container = document.querySelector('.testimonials-grid');
   if (!container) return;
 
+  if (!testimonials.length) {
+    container.innerHTML = '';
+    return;
+  }
+
   try {
-    const response = await fetch('data/testimonials.json');
-    if (!response.ok) throw new Error('Failed to load testimonials');
-
-    const { testimonials } = await response.json();
-
     // Create wrapper and track structure
     const wrapper = document.createElement('div');
     wrapper.className = 'testimonials-wrapper';
@@ -189,8 +194,8 @@ function createTestimonialCard(testimonial, isClone = false) {
 
   article.innerHTML = `
     <img
-      src="${testimonial.img}"
-      alt="${testimonial.alt}"
+      src="${escape(testimonial.img)}"
+      alt="${escape(testimonial.alt)}"
       class="testimonial-img"
       loading="lazy"
     >
@@ -201,8 +206,8 @@ function createTestimonialCard(testimonial, isClone = false) {
         </svg>
       </div>
       <div style="margin-top: auto;">
-        <h3 class="testimonial-name">${testimonial.name}</h3>
-        <p class="testimonial-event">${testimonial.event}</p>
+        <h3 class="testimonial-name">${escape(testimonial.name)}</h3>
+        <p class="testimonial-event">${escape(testimonial.event)}</p>
       </div>
     </div>
   `;
